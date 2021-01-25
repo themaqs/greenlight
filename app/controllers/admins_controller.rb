@@ -35,7 +35,7 @@ class AdminsController < ApplicationController
   def index
     # Initializa the data manipulation variables
     @search = params[:search] || ""
-    @order_column = params[:column] && params[:direction] != "none" ? params[:column] : "created_at"
+    @order_column = params[:column] && params[:direction] != "none" ? params[:column] : "activated_at"
     @order_direction = params[:direction] && params[:direction] != "none" ? params[:direction] : "DESC"
     @tab = params[:tab] || "active"
     @role = params[:role] ? Role.find_by(name: params[:role], provider: @user_domain) : nil
@@ -45,7 +45,7 @@ class AdminsController < ApplicationController
     else
       manage_users_list
     end
-
+    @users_num = users.length
     @pagy, @users = pagy(users)
   end
 
@@ -67,8 +67,9 @@ class AdminsController < ApplicationController
     else
       @latest = true
     end
-
-    @pagy, @recordings = pagy_array(recordings_to_show(user_email, room_uid))
+    recs = recordings_to_show(user_email, room_uid)
+    @recs_num = recs.length
+    @pagy, @recordings = pagy_array(recs)
   end
 
   # GET /admins/rooms
@@ -91,7 +92,7 @@ class AdminsController < ApplicationController
     meetings.each do |meet|
       @participants_count[meet[:meetingID]] = meet[:participantCount]
     end
-
+    @rooms_num = server_rooms_list.length
     @pagy, @rooms = pagy_array(server_rooms_list)
   end
 
