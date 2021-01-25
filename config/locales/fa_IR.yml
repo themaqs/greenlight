@@ -522,7 +522,7 @@ fa_IR:
     banned: منع شده
     deleted: حذف شد
     pending: در انتظار تایید
-    user: کاربر
+    user: دانشجو
   room:
     access_code_required: لطفا کد دسترسی معتبر برای ورود به جلسه را وارد کنید
     add_presentation: اضافه کردن ارائه

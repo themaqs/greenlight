@@ -26,7 +26,7 @@ class Role < ApplicationRecord
   scope :by_priority, -> { order(:priority) }
   scope :editable_roles, ->(provider) { where(provider: provider).where.not(name: %w[super_admin denied pending]) }
 
-  RESERVED_ROLE_NAMES = %w[super_admin admin pending denied user]
+  RESERVED_ROLE_NAMES = %w[super_admin admin pending denied student]
 
   def self.duplicate_name(name, provider)
     RESERVED_ROLE_NAMES.include?(name) || Role.exists?(name: name, provider: provider)
