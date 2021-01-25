@@ -10,3 +10,11 @@ cd $erdir/usr/src/app/vendor/bundle/ruby/2.5.0/gems;
 esmal=`grep -r "jpegPhoto" | cut -d':' -f1`;
 sed -i "s/\[:jpegPhoto]/[:jpegPhoto],'pre_name' => [:eduPersonNickname],'iasbs_role' => [:eduPersonEntitlement]/g" $esmal;
 cd ~;
+
+
+
+
+
+
+
+
