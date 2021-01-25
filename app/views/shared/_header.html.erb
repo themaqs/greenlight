@@ -18,22 +18,22 @@
     <div class="d-flex">
       <%= link_to (current_user ? home_page : root_path), class: "header-brand" do %>
         <% begin %>
-          <%= image_tag(logo_image, class: "header-brand-img", alt:"") %>
+          <%= image_tag(logo_image, class: "header-brand-img", alt:"IASBS Logo", width: "401", height:"100", style:"height:2.75rem !important;") %>
         <% rescue %>
           <%= t("administrator.site_settings.branding.invalid") %>
         <% end %>
       <% end %>
 
-      <div class="d-flex ml-auto">
+      <div class="d-flex ml-auto" style="margin-bottom:0.5rem">
         <% if current_user %>
 
-          <%= link_to home_page, class: "px-3 mx-1 mt-1 header-nav #{active_home}" do %>
+          <%= link_to home_page, class: "px-3 mx-1 mt-1 header-nav #{active_home}", style:"padding:unset" do %>
             <i class="fas fa-home pr-1 "></i><span class="d-none d-sm-inline-block"><%= t("header.dropdown.home") %></span>
           <% end %>
 
           <% if current_user.role.get_permission("can_create_rooms") && !current_user.has_role?(:super_admin) && !hide_recording_tables %>
             <% all_rec_page = params[:controller] == "users" && params[:action] == "recordings" ? "active" : "" %>
-            <%= link_to get_user_recordings_path(current_user), class: "px-3 mx-1 mt-1 header-nav #{all_rec_page}" do %>
+            <%= link_to get_user_recordings_path(current_user), class: "px-3 mx-1 mt-1 header-nav #{all_rec_page}", style:"padding:unset" do %>
               <i class="fas fa-video pr-1"></i><span class="d-none d-sm-inline-block"><%= t("header.all_recordings") %></span>
             <% end %>
           <% end %>
