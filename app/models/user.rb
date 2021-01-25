@@ -120,7 +120,7 @@ class User < ApplicationRecord
 
   # Activates an account and initialize a users main room
   def activate
-    set_role :user if role_id.nil?
+    set_role :student if role_id.nil?
     update_attributes(email_verified: true, activated_at: Time.zone.now, activation_digest: nil)
   end
 
