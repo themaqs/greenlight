@@ -63,6 +63,8 @@ module RecordingsHelper
 
   def get_save_url(id,name, time)
     class_name = name.gsub(' ', '_')
+    local_time(time, "%b %d, %Y %H:%M")
+
     t = DateTime.parse(time.to_s)
     t = t.new_offset(ENV['TIME_OFFSET'])
     t = t.strftime("%Y-%m-%d_%H-%M")
