@@ -75,8 +75,6 @@ class SessionsController < ApplicationController
     # Check user with that email exists
     return redirect_to(signin_path, alert: I18n.t("invalid_credentials")) unless user
 
-    user.update_attribute(:activated_at, DateTime.now) unless user
-
     # Check if authenticators have switched
     return switch_account_to_local(user) if !is_super_admin && auth_changed_to_local?(user)
 
@@ -87,7 +85,6 @@ class SessionsController < ApplicationController
     return redirect_to root_path, flash: { alert: I18n.t("registration.banned.fail") } if user.deleted?
 
     unless is_super_admin
-      user.update_attribute(:activated_at, DateTime.now) unless user
       # Check that the user is a Greenlight account
       return redirect_to(root_path, alert: I18n.t("invalid_login_method")) unless user.greenlight_account?
       # Check that the user has verified their account
@@ -216,7 +213,6 @@ class SessionsController < ApplicationController
     switch_account_to_social if !@user_exists && auth_changed_to_social?(@auth['info']['email'])
 
     user = User.from_omniauth(@auth)
-    user.update_attribute(:activated_at, DateTime.now) unless user
 
     logger.info "Support: Auth user #{user.email} is attempting to login."
 

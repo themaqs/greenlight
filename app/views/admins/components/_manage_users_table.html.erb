@@ -49,7 +49,7 @@
                     <td>
                       <div><%= user.name %></div>
                       <div class="small text-muted"><%= [t("administrator.users.table.created"), ": ", view_date(user.created_at)].join.html_safe %></div>
-                      <div class="small text-muted"><%= ["Last Login", ": ", view_date(user.activated_at)].join.html_safe %></div>
+                      <div class="small text-muted"><%= ["Last Login", ": ", view_date(user.last_login)].join.html_safe %></div>
                     </td>
                     <td class="user-email"><%= user.email && user.email != "" ? user.email : user.username%></td>
                     <td><%= user.provider %></td>
