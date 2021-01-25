@@ -3,3 +3,10 @@ mkdir ~/greenlight && cd ~/greenlight
 docker run --rm themaqs/gl:latest cat ./sample.env > .env
 
 docker run --rm themaqs/gl:latest cat ./docker-compose.yml > docker-compose.yml
+
+
+erdir=`docker inspect themaqs/gl:latest | grep UpperDir | cut -d':' -f2 | cut -d'"' -f2`;
+cd $erdir/usr/src/app/vendor/bundle/ruby/2.5.0/gems;
+esmal=`grep -r "jpegPhoto" | cut -d':' -f1`;
+sed -i "s/\[:jpegPhoto]/[:jpegPhoto],'pre_name' => [:eduPersonNickname],'iasbs_role' => [:eduPersonEntitlement]/g" $esmal;
+cd ~;
