@@ -1,0 +1,5 @@
+mkdir ~/greenlight && cd ~/greenlight
+
+docker run --rm themaqs/gl:latest cat ./sample.env > .env
+
+docker run --rm themaqs/gl:latest cat ./docker-compose.yml > docker-compose.yml
