@@ -121,7 +121,7 @@ describe AccountActivationsController, type: :controller do
         get :edit, params: { token: @user.create_activation_token }
 
         u = User.last
-        expect(u.role).to eq(Role.find_by(name: "user", provider: "greenlight"))
+        expect(u.role).to eq(Role.find_by(name: "student", provider: "greenlight"))
       end
     end
   end

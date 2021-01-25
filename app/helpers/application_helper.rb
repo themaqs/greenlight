@@ -81,7 +81,7 @@ module ApplicationHelper
       I18n.t("roles.pending")
     elsif role.name == "admin"
       I18n.t("roles.admin")
-    elsif role.name == "user"
+    elsif role.name == "student"
       I18n.t("roles.user")
     else
       role.name

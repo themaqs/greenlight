@@ -33,7 +33,7 @@ class Role < ApplicationRecord
   end
 
   def self.create_default_roles(provider)
-    Role.create(name: "user", provider: provider, priority: 1, colour: "#868e96")
+    Role.create(name: "student", provider: provider, priority: 1, colour: "#868e96")
         .update_all_role_permissions(can_create_rooms: true)
     Role.create(name: "admin", provider: provider, priority: 0, colour: "#f1c40f")
         .update_all_role_permissions(can_create_rooms: true, send_promoted_email: true,
@@ -52,7 +52,7 @@ class Role < ApplicationRecord
     # This means that it will only be more important than the user role
     # This also updates the user role to have the highest priority
     role = Role.create(name: role_name, provider: provider)
-    user_role = Role.find_by(name: 'user', provider: provider)
+    user_role = Role.find_by(name: 'student', provider: provider)
 
     role.priority = user_role.priority
     user_role.priority += 1

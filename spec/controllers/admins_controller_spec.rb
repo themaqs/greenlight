@@ -604,7 +604,7 @@ describe AdminsController, type: :controller do
 
         expect(response).to render_template :roles
         expect(assigns(:roles).count).to eq(2)
-        expect(assigns(:selected_role).name).to eq("user")
+        expect(assigns(:selected_role).name).to eq("student")
       end
 
       it "should render the roles editor with the request role selected" do
@@ -651,7 +651,7 @@ describe AdminsController, type: :controller do
         post :new_role, params: { role: { name: "test" } }
 
         new_role = Role.find_by(name: "test", provider: "provider1")
-        user_role = Role.find_by(name: "user", provider: "provider1")
+        user_role = Role.find_by(name: "student", provider: "provider1")
 
         expect(new_role.priority).to eq(1)
         expect(user_role.priority).to eq(2)
@@ -662,13 +662,13 @@ describe AdminsController, type: :controller do
     context "PATCH #change_role_order" do
       before do
         Role.create_default_roles("provider1")
-        @user.roles.delete(Role.find_by(name: "user", provider: "greenlight"))
+        @user.roles.delete(Role.find_by(name: "student", provider: "greenlight"))
       end
 
       it "should fail if user attempts to change the order of the admin or user roles" do
         @request.session[:user_id] = @admin.id
 
-        user_role = Role.find_by(name: "user", provider: "provider1")
+        user_role = Role.find_by(name: "student", provider: "provider1")
         admin_role = Role.find_by(name: "admin", provider: "provider1")
 
         patch :change_role_order, params: { role: [user_role.id, admin_role.id] }
@@ -694,7 +694,7 @@ describe AdminsController, type: :controller do
       end
 
       it "should update the role order" do
-        user_role = Role.find_by(name: "user", provider: "provider1")
+        user_role = Role.find_by(name: "student", provider: "provider1")
         user_role.update_attribute(:priority, 4)
         new_role1 = Role.create(name: "test1", priority: 1, provider: "provider1")
         new_role2 = Role.create(name: "test2", priority: 2, provider: "provider1")
@@ -719,11 +719,11 @@ describe AdminsController, type: :controller do
     context 'POST #update_role' do
       before do
         Role.create_default_roles("provider1")
-        @user.roles.delete(Role.find_by(name: "user", provider: "greenlight"))
+        @user.roles.delete(Role.find_by(name: "student", provider: "greenlight"))
       end
 
       it "should fail to update a role with a lower priority than the user" do
-        user_role = Role.find_by(name: "user", provider: "provider1")
+        user_role = Role.find_by(name: "student", provider: "provider1")
         user_role.update_attribute(:priority, 3)
         new_role1 = Role.create(name: "test1", priority: 1, provider: "provider1")
         new_role2 = Role.create(name: "test2", priority: 2, provider: "provider1")

@@ -186,7 +186,7 @@ describe UsersController, type: :controller do
 
           u = User.find_by(name: params[:user][:name], email: params[:user][:email])
 
-          expect(u.role).to eq(Role.find_by(name: "user", provider: "greenlight"))
+          expect(u.role).to eq(Role.find_by(name: "student", provider: "greenlight"))
         end
       end
     end
