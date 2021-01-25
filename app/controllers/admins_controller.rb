@@ -35,7 +35,7 @@ class AdminsController < ApplicationController
   def index
     # Initializa the data manipulation variables
     @search = params[:search] || ""
-    @order_column = params[:column] && params[:direction] != "none" ? params[:column] : "activated_at"
+    @order_column = params[:column] && params[:direction] != "none" ? params[:column] : "last_login"
     @order_direction = params[:direction] && params[:direction] != "none" ? params[:direction] : "DESC"
     @tab = params[:tab] || "active"
     @role = params[:role] ? Role.find_by(name: params[:role], provider: @user_domain) : nil
