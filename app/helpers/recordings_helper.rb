@@ -52,4 +52,20 @@ module RecordingsHelper
       "#{len} min"
     end
   end
+
+  def get_play_url(id)
+    "#{request.base_url}#{ENV['RELATIVE_URL_ROOT']}/play?tkn=#{id}"
+  end
+
+  def get_users_url(id)
+    "#{request.base_url}#{ENV['RELATIVE_URL_ROOT']}/users_list?tkn=#{id}"
+  end
+
+  def get_save_url(id,name, time)
+    class_name = name.gsub(' ', '_')
+    t = DateTime.parse(time.to_s)
+    t = t.new_offset(ENV['TIME_OFFSET'])
+    t = t.strftime("%Y-%m-%d_%H-%M")
+    "#{ENV['MEDIA_SERVER_LINK']}/presentation/#{id}/#{class_name}_#{t}.zip"
+  end
 end
