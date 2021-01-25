@@ -44,7 +44,21 @@
     <%= recording_length(recording[:playbacks]) %>
   </td>
   <td id="recording-users" class="text-left">
-    <%= recording[:participants] || "-" %>
+    <% show_users_list = false %>
+    <% if ENV['USERS_LIST'] == 'admin' && current_user&.role&.get_permission("can_manage_rooms_recordings") %>
+      <% show_users_list = true %>
+    <% elsif ENV['USERS_LIST'] == 'owner' &&  (current_user&.role&.get_permission("can_manage_rooms_recordings") || (@room && @room.owned_by?(current_user))) %>
+      <% show_users_list = true %>
+    <% elsif ENV['USERS_LIST'] == 'all'%>
+      <% show_users_list = true %>
+    <% end %>
+    <% if not show_users_list %>
+      <%= recording[:participants] %>
+    <% else %>
+      <a target="_blank" href=<%= get_users_url(recording[:recordID]) %> class="btn btn-sm btn-secondary" style="color:black !important;" >
+      List (<%= recording[:participants]%>)
+      </a>
+    <% end %>
   </td>
   <td class="text-left">
     <div class="dropdown">
