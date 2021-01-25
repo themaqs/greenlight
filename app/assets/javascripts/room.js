@@ -209,8 +209,8 @@ function showCreateRoom(target) {
   $("#room_require_moderator_approval").prop("checked", $("#room_require_moderator_approval").data("default"))
   $("#room_anyone_can_start").prop("checked", $("#room_anyone_can_start").data("default"))
   $("#room_all_join_moderator").prop("checked", $("#room_all_join_moderator").data("default"))
-  $("#room_recording").prop("checked", $("#room_recording").data("default"))
-
+  // $("#room_recording").prop("checked", $("#room_recording").data("default"))
+  $("#room_recording").prop("checked", "true")
   //show all elements & their children with a create-only class
   $(".create-only").each(function() {
     $(this).show()
