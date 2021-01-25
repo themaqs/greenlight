@@ -34,9 +34,9 @@ en:
       authentication:
         disabled: Disabled
         enabled: Enabled
-        info: Only allow authenticated users to join a room
+        info: Only allow authenticated users to join a class
         title: Require Authentication for Rooms
-        user-info: You must sign in above to join this room.
+        user-info: You must sign in above to join this class.
       branding:
         change: Change Image
         info: Change the branding image that appears in the top left corner
@@ -85,9 +85,9 @@ en:
       recording_visibility:
         info: Set the default recording visbility for new recordings
         title: Recording Default Visibility
-        warning: This setting will only be applied to rooms that aren't running
+        warning: This setting will only be applied to classes that aren't running
       require_consent:
-        info: This setting enables a room setting that allows room owners to specify which rooms can be recorded. Users joining a recorded room must consent before joining.
+        info: This setting enables a class setting that allows class owners to specify which classes can be recorded. Users joining a recorded class must consent before joining.
         title: Require Room Owner and Joiner Consent to Recording
       maintenance_banner:
         info: Displays a Banner to inform the user of a scheduled maintenance
@@ -96,7 +96,7 @@ en:
         clear: Clear
         time: "Example: Update scheduled on December 13 @ 23:00 ET. Users may experience problems signing in."
       preupload:
-        info: Users can preupload a presentation to be used as the default presentation for that specific room
+        info: Users can preupload a presentation to be used as the default presentation for that specific class
         title: Allow Users to Preupload Presentations
       registration:
         info: Change the way that users register to the website
@@ -106,11 +106,11 @@ en:
           invite: Join by Invitation
           open: Open Registration
       rooms:
-        info: Limits the number of rooms that a user can have (including Home Room). This setting does not apply to administrators.
-        title: Number of Rooms per User
+        info: Limits the number of classes that a user can have (including Home Room). This setting does not apply to administrators.
+        title: Number of Classes per User
       shared_access:
-        info: Setting to disabled will remove the button from the Room options dropdown, preventing users from sharing rooms
-        title: Allow Users to Share Rooms
+        info: Setting to disabled will remove the button from the Room options dropdown, preventing users from sharing classes
+        title: Allow Users to Share Classes
       subtitle: Customize Greenlight
       tabs:
         appearance: Appearance
@@ -141,15 +141,15 @@ en:
       latest: Latest Recordings
       title: Server Recordings
       no_recordings: This server has no recordings.
-      search_info: Enter a user's full email or a room's uid
+      search_info: Enter a user's full email or a class's uid
     roles:
-      appear_in_share_list: Include users with this role in the dropdown for sharing rooms
-      can_create_rooms: Can create rooms
+      appear_in_share_list: Include users with this role in the dropdown for sharing classes
+      can_create_rooms: Can create classes
       delete: Delete the role
       invalid_create: There was a problem creating a new role. Please check the role values and try again
       invalid_order: There was a problem updating the priority of the role. Please check the values and try again
       invalid_update: There was a problem updating the permissions of the role. Please check the values and try again
-      manage_rooms_recordings: Allow users with this role to manage server rooms and recordings
+      manage_rooms_recordings: Allow users with this role to manage server classes and recordings
       name: Role Name
       new_role: Create a new role
       role_has_users: This role is assigned to %{user_count} accounts. Please remove all accounts from this role before deleting it.
@@ -170,18 +170,18 @@ en:
       require_moderator:
         info: Prompts the moderator of the BigBlueButton meeting when a user tries to join. If the user is approved, they will be able to join the meeting.
       allow_any:
-        info: Allows any user to start the meeting at any time. By default, only the room owner can start the meeting.
+        info: Allows any user to start the meeting at any time. By default, only the class owner can start the meeting.
       all_moderator:
         info: Gives all users moderator privileges in BigBlueButton when they join the meeting.
       recordings:
-        info: Allows room owners to specify whether they want the option to record a room or not. If enabled, the moderator must still click the "Record" button once the meeting has started.
+        info: Allows class owners to specify whether they want the option to record a class or not. If enabled, the moderator must still click the "Record" button once the meeting has started.
       options:
         disabled: Disabled
         enabled: Always Enabled
         optional: Optional
     rooms:
       timeout: Due to the %{server} Server request timing out, the information for status and participants may not be accurate
-      title: Server Rooms
+      title: Server Classes
       table:
         ended: "Ended: %{session}"
         id: ID
@@ -220,7 +220,7 @@ en:
         valid: Valid
       title: Manage Users
   add_to_google_calendar: "Add to Google Calendar"
-  bigbluebutton: BigBlueButton
+  bigbluebutton: IASBS|E-Learn
   bigbluebutton_exception: Oops, there was an error when starting the meeting!
   cancel: Cancel
   cookies:
@@ -240,8 +240,8 @@ en:
   errors:
     bigbluebutton:
       help: Please make sure the proper steps have been taken. <a href="%{doc_link}">Learn more</a>
-      message: Invalid BigBlueButton Endpoint and Secret
-      title: Server Error
+      message: Server is down for maintanence!
+      title: Error
     internal:
       message: Looks like something went wrong on our end.
       help: The error has been logged, we'll take a look!
@@ -284,7 +284,7 @@ en:
   expired_reset_token: Password reset link has expired!
   features:
     title: Features
-    rooms: Personalized Rooms
+    rooms: Personalized Classes
     recordings: Recording Management
     designs: Custom Designs
     authentication: User Authentication
@@ -306,10 +306,10 @@ en:
       home: Home
       settings: Profile
       signout: Sign out
-  home_room: Home Room
+  home_room: Home Class
   info_update_success: Information successfully updated.
-  invalid_credentials: The email and password you entered did not match our records. Try again or click Forgot Password to reset your password.
-  invalid_login_method: Login failed due to account mismatch. You need to log in with omniauth.
+  invalid_credentials: The credentials you supplied were not correct!
+  invalid_login_method: Login failed due to account mismatch. You need to log in with other methods.
   invite_message: "To invite someone to the meeting, send them this link:"
   javascript:
     room:
@@ -321,7 +321,7 @@ en:
     search:
       start: Start searching...
   landing:
-    about: "%{href} is a simple front-end for your BigBlueButton open-source web conferencing server. You can create your own rooms to host sessions, or join others using a short and convenient link."
+    about: "%{href} is a simple front-end for your BigBlueButton open-source web conferencing server. You can create your own classes to host sessions, or join others using a short and convenient link."
     welcome: Welcome to BigBlueButton.
     video: Watch our tutorial on using Greenlight
     upgrade: Show me how to upgrade to 2.0!
@@ -334,7 +334,7 @@ en:
     user:
       approve:
         info: Your account has been approved.
-        signin: To access your personal rooms, click the button below and sign in.
+        signin: To access your personal classes, click the button below and sign in.
         signin_link: Sign In
         signup:
           info: A new user has signed up to use Greenlight.
@@ -374,7 +374,7 @@ en:
         subtitle: "%{role} Rights Granted"
       verify_email:
         welcome: Welcome to your personal space, %{name}!
-        success: Leveraging %{bigbluebutton}, you can create your own rooms to host sessions and collaborate with others.
+        success: Leveraging %{bigbluebutton}, you can create your own classes to host sessions and collaborate with others.
         username: Your username is %{email}.
         verify: To verify your account, just click the button below.
         verify_text: 'To verify your account, just follow this link: %{url}'
@@ -391,13 +391,13 @@ en:
       title: Create New Role
     create_room:
       access_code: Access Code
-      access_code_placeholder: Generate an optional room access code
-      auto_join: Automatically join me into the room
-      create: Create Room
-      free_delete: You will be free to delete this room at any time.
-      name_placeholder: Enter a room name...
-      not_blank: Room name cannot be blank.
-      title: Create New Room
+      access_code_placeholder: Generate an optional class access code
+      auto_join: Automatically join me into the class
+      create: Create Class
+      free_delete: You will be free to delete this class at any time.
+      name_placeholder: Enter a class name...
+      not_blank: Class name cannot be blank.
+      title: Create New Class
     delete_account:
       confirm: Are you sure you want to delete this account?
       delete: I'm sure, delete this account.
@@ -409,10 +409,10 @@ en:
       header: Are you sure you want to delete this recording?
       warning: You will <b>not</b> be able to recover this recording
     delete_room:
-      confirm: Are you sure you want to delete %{room}?
-      delete: I'm sure, delete this room.
+      confirm: Are you sure you want to delete %{class}?
+      delete: I'm sure, delete this class.
       keep: On second thought, I'll keep it.
-      warning: You will <b>not</b> be able to recover this room
+      warning: You will <b>not</b> be able to recover this class
       recording_warning: or any of its %{recordings_num} associated recordings.
     invite_user:
       email_placeholder: Enter the users' emails (separated by commas)
@@ -433,25 +433,25 @@ en:
       use: Use Presentation
     rename_recording:
     remove_shared:
-      title: Are you sure you want to remove this room from your room list?
-      delete: I'm sure, remove this room.
-      warning: You will <b>not</b> be able to access this room anymore.
+      title: Are you sure you want to remove this class from your class list?
+      delete: I'm sure, remove this class.
+      warning: You will <b>not</b> be able to access this class anymore.
     room_settings:
-      title: Room Settings
-      update: Update Room
+      title: Class Settings
+      update: Update Class
       client: Select client type
       join_moderator: All users join as moderators
       mute: Mute users when they join
       require_approval: Require moderator approval before joining
       start: Allow any user to start this meeting
-      footer_text: Adjustment to your room can be done at anytime.
-      recording: Allow room to be recorded
+      footer_text: Adjustment to your class can be done at anytime.
+      recording: Allow class to be recorded
     rename_room:
-      name_placeholder: Enter a new room name...
+      name_placeholder: Enter a new class name...
     share_access:
-      footer: Sharing a room with a user allows them to start the room and view the room's recordings
+      footer: Sharing a class with a user allows them to start the class and view the class's recordings
       list: Shared With
-      title: Share Room Access
+      title: Share Class Access
       save: Save Changes
       cancel_changes: Cancel Changes
       select: Select User
@@ -461,11 +461,11 @@ en:
       title: Merge User Accounts
       to: Primary Account
       save: Merge
-      footer: The rooms of the account to be merged will be transfered over to the Primary Account's room list and then the account will be deleted.
-  name_update_success: Room name successfully changed!
+      footer: The classes of the account to be merged will be transfered over to the Primary Account's class list and then the account will be deleted.
+  name_update_success: Class name successfully changed!
   no_user_email_exists: There is no existing user with the email specified. Please make sure you typed it correctly.
-  omniauth_error: An error occured while authenticating with omniauth. Please try again or contact an administrator!
-  omniauth_specific_error: "%{error} occured while authenticating with omniauth. Please try again or contact an administrator!"
+  omniauth_error: An error occured while authenticating with this method. Please try again or contact an administrator!
+  omniauth_specific_error: "%{error} occured while authenticating with this method. Please try again or contact an administrator!"
   pagy:
     nav:
       prev: "&lsaquo; Prev"
@@ -479,7 +479,7 @@ en:
     google: Google
     office365: Office 365
     twitter: Twitter
-    ldap: LDAP
+    ldap: IASBS
     openid_connect: OpenID Connect
   recaptcha:
     errors:
@@ -489,7 +489,7 @@ en:
     all_recordings: All Recordings
     email: Email Recording
     error: There was an error retrieving %{count} recording(s)
-    no_recordings: This room has no %{inject}recordings.
+    no_recordings: This class has no %{inject}recordings.
     no_user_recordings: You currently have no recordings.
     no_matched_recordings: No %{inject} recordings match your search.
     recorded_on: Recorded on %{date}
@@ -516,7 +516,7 @@ en:
     banned:
       fail: You do not have access to this application. If you believe this is a mistake, please contact your administrator.
     deprecated:
-      new_signin: Select a new login method for you account. All your rooms from your old account will be migrated to the new account
+      new_signin: Select a new login method for you account. All your classes from your old account will be migrated to the new account
       twitter_signin: Signing in via Twitter has been deprecated and will be removed in the next release. Click <a href="%{link}"> here </a> to move your account to a new authentication method
       twitter_signup: Sign up via Twitter has been deprecated. Please use a different sign up method
       merge_success: Successfully merged your twitter account with your new account. Your old twitter account has been deleted
@@ -540,17 +540,17 @@ en:
     pending: Pending
     user: User
   room:
-    access_code_required: Please enter a valid access code to join the room
+    access_code_required: Please enter a valid access code to join the class
     add_presentation: Add Presentation
     copy_access: Copy Access Code
-    create_room: Create a Room
-    create_room_error: There was an error creating the room
-    create_room_success: Room created successfully
+    create_room: Create a Class
+    create_room_error: There was an error creating the class
+    create_room_success: Class created successfully
     delete:
-      home_room: Can't delete user's Home Room
-      success: Room deleted successfully
-      fail: Failed to delete room (%{error})
-    enter_the_access_code: Enter the room's access code
+      home_room: Can't delete user's Home Class
+      success: Class deleted successfully
+      fail: Failed to delete class (%{error})
+    enter_the_access_code: Enter the class's access code
     invalid_provider: You have entered an invalid url. Please check the url and try again.
     invitation_description: You have been invited to join %{name} using BigBlueButton. To join, click the link above and enter your name.
     invited: You have been invited to join
@@ -560,37 +560,37 @@ en:
     last_session: Last session on %{session}
     login: Enter
     owner: Owner
-    owner_banned: This room is currently unavailable
+    owner_banned: This class is currently unavailable
     no_room:
-      description: Enter the room url or the room id for the room you want to join.
+      description: Enter the class url or the class id for the class you want to join.
       edit_profile: Edit User Profile
-      go_to: Go to the Room
-      invalid_room_uid: The room url/uid you entered was invalid.
-      placeholder: Room url/uid
-      no_recent_rooms: You don't have any recently joined rooms
-      recent_rooms: Go To a Recently Joined Room
-      title: Join a Room
-    no_sessions: This room has no sessions, yet!
+      go_to: Go to the Class
+      invalid_room_uid: The class url/uid you entered was invalid.
+      placeholder: Class url/uid
+      no_recent_rooms: You don't have any recently joined classes
+      recent_rooms: Go To a Recently Joined Class
+      title: Join a Class
+    no_sessions: This class has no sessions, yet!
     preupload_success: Successfully added presentation
-    preupload_error: There was an error updating the room presentation
+    preupload_error: There was an error updating the class presentation
     preupload_remove_success: Successfully removed presentation
-    preupload_remove_error: There was an error removing the room presentation
-    recordings: Room Recordings
-    room_limit: You have reached the maximum number of rooms allowed
-    room_limit_exceeded: You have exceeded the number of rooms allowed. Please delete %{difference} room(s) to access this room.
+    preupload_remove_error: There was an error removing the class presentation
+    recordings: Class Recordings
+    room_limit: You have reached the maximum number of classes allowed
+    room_limit_exceeded: You have exceeded the number of classes allowed. Please delete %{difference} class(s) to access this class.
     sessions: Sessions
-    settings: Room Settings
+    settings: Class Settings
     share: Manage Access
     shared_by: Shared by %{email}
-    remove_shared_access_success: Successfully removed shared room from your room list
-    remove_shared_access_error: There was an error removing the shared room from your list
-    shared_access_success: Room shared successfully
-    shared_access_error: There was an error sharing the room
+    remove_shared_access_success: Successfully removed shared class from your class list
+    remove_shared_access_error: There was an error removing the shared class from your list
+    shared_access_success: Class shared successfully
+    shared_access_error: There was an error sharing the class
     start: Start
-    search: Search for room…
-    unavailable: This room is currently unavailable due to the owner's email not being verified.
-    update_settings_error: There was an error updating the room settings
-    update_settings_success: Room settings successfully updated
+    search: Search for class…
+    unavailable: This class is currently unavailable due to the owner's email not being verified.
+    update_settings_error: There was an error updating the class settings
+    update_settings_success: Class settings successfully updated
     wait:
       message: The meeting hasn't started yet.
       auto: You will automatically join when the meeting starts.
@@ -607,7 +607,7 @@ en:
       reset_password: Reset user password
     delete:
       button: Yes, I would like to delete my account.
-      disclaimer: If you choose to delete your account, it will <b>NOT</b> be recoverable. All information regarding your account, including settings, rooms, and recording will be removed.
+      disclaimer: If you choose to delete your account, it will <b>NOT</b> be recoverable. All information regarding your account, including settings, classes, and recording will be removed.
       subtitle: Permanently Delete your Account
       title: Delete Account
     password:
