@@ -29,7 +29,7 @@ module Rolify
     end
 
     @selected_role = if selected_role.nil?
-      @roles.find_by(name: 'user')
+      @roles.find_by(name: 'student')
     else
       @roles.find(selected_role)
     end
@@ -67,7 +67,7 @@ module Rolify
 
   # Updates a roles priority
   def update_priority(role_to_update)
-    user_role = Role.find_by(name: "user", provider: @user_domain)
+    user_role = Role.find_by(name: "student", provider: @user_domain)
     admin_role = Role.find_by(name: "admin", provider: @user_domain)
 
     current_user_role = current_user.role
