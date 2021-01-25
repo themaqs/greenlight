@@ -25,7 +25,16 @@ module AuthValues
     when :office365
       auth['info']['display_name']
     else
-      auth['info']['name']
+      nik =""
+      if !auth['info']['pre_name'].nil? && auth['info']['pre_name'].downcase == 'prof'
+        nik="Prof. "
+      elsif !auth['info']['pre_name'].nil? && auth['info']['pre_name'].downcase == 'dr'
+        nik="Dr. "
+      elsif !auth['info']['roles'].nil? && auth['info']['iasbs_role'].downcase == 'faculty'
+        nik = "Dr. "
+      end
+      r = "#{auth['info']['first_name']} #{auth['info']['last_name']}"
+      "#{nik}#{r.split.map(&:capitalize).join(' ')}"
     end
   end
 
@@ -49,8 +58,16 @@ module AuthValues
     when :twitter
       auth['info']['image'].gsub("http", "https").gsub("_normal", "")
     when :ldap
-      return auth['info']['image'] if auth['info']['image']&.starts_with?("http")
-      ""
+      require "net/http"
+      url = URI.parse("https://iasbs.ac.ir/files/images/people/#{auth['info']['nickname']}.jpg")
+      req = Net::HTTP.new(url.host, url.port)
+      req.use_ssl = true
+      res = req.request_head(url.path)
+      if res.code == "200"
+        "https://iasbs.ac.ir/files/images/people/#{auth['info']['nickname']}.jpg"
+      else
+        ""
+      end
     else
       auth['info']['image']
     end

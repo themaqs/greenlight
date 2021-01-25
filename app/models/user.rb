@@ -51,7 +51,6 @@ class User < ApplicationRecord
 
   # We don't want to require password validations on all accounts.
   has_secure_password(validations: false)
-
   class << self
     include AuthValues
     include Queries
