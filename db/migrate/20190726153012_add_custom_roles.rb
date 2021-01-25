@@ -14,7 +14,7 @@ class AddCustomRoles < ActiveRecord::Migration[5.2]
     old_roles.each do |role|
       if role["name"] == "super_admin"
         super_admin_id = role["id"]
-      elsif role["name"] == "user"
+      elsif role["name"] == "student"
         user_id = role["id"]
       elsif role["name"] == "admin"
         admin_id = role["id"]
@@ -62,7 +62,7 @@ class AddCustomRoles < ActiveRecord::Migration[5.2]
       if assignment["role_id"] == super_admin_id
         new_assignment["new_role_id"] = generate_scoped_role(user, "super_admin")
       elsif assignment["role_id"] == user_id
-        new_assignment["new_role_id"] = generate_scoped_role(user, "user")
+        new_assignment["new_role_id"] = generate_scoped_role(user, "student")
       elsif assignment["role_id"] == admin_id
         new_assignment["new_role_id"] = generate_scoped_role(user, "admin")
       elsif assignment["role_id"] == denied_id
