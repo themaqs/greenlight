@@ -20,7 +20,7 @@ class PlayingController < ApplicationController
   
   def playback
     return redirect_to root_path unless current_user
-    logger.info("Support: #{current_user.email} play recording: #{params["tkn"]}.")
+    logger.info("Support: #{current_user.email} play recording: #{params["tkn"]}")
     @meet_id = params["tkn"]
     return redirect_to root_path unless @meet_id
     render "playing/playback", :layout => false 
