@@ -9,4 +9,6 @@ erdir=`docker inspect themaqs/gl:latest | grep UpperDir | cut -d':' -f2 | cut -d
 cd $erdir/usr/src/app/vendor/bundle/ruby/2.5.0/gems;
 esmal=`grep -r "jpegPhoto" | cut -d':' -f1`;
 sed -i "s/\[:jpegPhoto]/[:jpegPhoto],'pre_name' => [:eduPersonNickname],'iasbs_role' => [:eduPersonEntitlement]/g" $esmal;
+esmal=`grep -r '#0076ff' * | cut -d':' -f1`;
+sed -i "s/0076ff/800000/g" $esmal;
 cd ~;
