@@ -20,7 +20,7 @@ class UserlistController < ApplicationController
   
   def userslist
     return redirect_to root_path unless current_user
-    return redirect_to root_path unless not (ENV['USERS_LIST'] == 'none')
+    return redirect_to root_path if ENV['USERS_LIST'] == 'none'
     if ENV['USERS_LIST'] == 'admin'
       return redirect_to root_path unless current_user&.role&.get_permission("can_manage_rooms_recordings")
     end
@@ -29,5 +29,17 @@ class UserlistController < ApplicationController
     render "playing/userlist", :layout => false 
   end
 
+  def get_log_tag()
+    return "[#{request.env["HTTP_X_FORWARDED_FOR"]}] [#{@current_user.email}]" unless @current_user.nil?
+    "[#{request.env["HTTP_X_FORWARDED_FOR"]}]"
+  end
+
+  def log_error(msg)
+    logger.error "#{get_log_tag}: #{msg}"
+  end
+
+  def log_info(msg)
+    logger.info "#{get_log_tag}: #{msg}"
+  end
 
 end

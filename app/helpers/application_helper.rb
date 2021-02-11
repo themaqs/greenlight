@@ -143,7 +143,7 @@ module ApplicationHelper
   end
 
   def get_log_tag()
-    return "[#{request.env["HTTP_X_FORWARDED_FOR"]}] [#{current_user.email}]" unless current_user.nil?
+    return "[#{request.env["HTTP_X_FORWARDED_FOR"]}] [#{@current_user.email}]" unless @current_user.nil?
     "[#{request.env["HTTP_X_FORWARDED_FOR"]}]"
   end
 

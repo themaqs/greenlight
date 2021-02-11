@@ -36,4 +36,17 @@ class ErrorsController < ApplicationController
     render "errors/greenlight_error", status: 401, formats: :html, locals: { status_code: 401,
       message: I18n.t("errors.unauthorized.message"), help: I18n.t("errors.unauthorized.help"), display_back: true }
   end
+  def get_log_tag()
+    return "[#{request.env["HTTP_X_FORWARDED_FOR"]}] [#{@current_user.email}]" unless @current_user.nil?
+    "[#{request.env["HTTP_X_FORWARDED_FOR"]}]"
+  end
+
+  def log_error(msg)
+    logger.error "#{get_log_tag}: #{msg}"
+  end
+
+  def log_info(msg)
+    logger.info "#{get_log_tag}: #{msg}"
+  end
+
 end

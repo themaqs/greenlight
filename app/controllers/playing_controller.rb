@@ -26,5 +26,17 @@ class PlayingController < ApplicationController
     render "playing/playback", :layout => false 
   end
 
+  def get_log_tag()
+    return "[#{request.env["HTTP_X_FORWARDED_FOR"]}] [#{@current_user.email}]" unless @current_user.nil?
+    "[#{request.env["HTTP_X_FORWARDED_FOR"]}]"
+  end
+
+  def log_error(msg)
+    logger.error "#{get_log_tag}: #{msg}"
+  end
+
+  def log_info(msg)
+    logger.info "#{get_log_tag}: #{msg}"
+  end
 
 end

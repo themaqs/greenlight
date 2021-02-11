@@ -59,4 +59,17 @@ class RecordingsController < ApplicationController
   def verify_room_ownership
     redirect_to root_path if !@room.owned_by?(current_user) && !current_user&.role&.get_permission("can_manage_rooms_recordings")
   end
+  def get_log_tag()
+    return "[#{request.env["HTTP_X_FORWARDED_FOR"]}] [#{@current_user.email}]" unless @current_user.nil?
+    "[#{request.env["HTTP_X_FORWARDED_FOR"]}]"
+  end
+
+  def log_error(msg)
+    logger.error "#{get_log_tag}: #{msg}"
+  end
+
+  def log_info(msg)
+    logger.info "#{get_log_tag}: #{msg}"
+  end
+
 end
