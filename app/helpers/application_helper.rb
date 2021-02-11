@@ -141,4 +141,16 @@ module ApplicationHelper
     return "None" if date.nil? # Handle invalid dates
     local_time(date, "%b %d, %Y %H:%M")
   end
+
+  def get_log_tag()
+    "[#{request.env["HTTP_X_FORWARDED_FOR"]}] [#{current_user.email}]"
+  end
+
+  def log_error(msg)
+    logger.error "#{get_log_tag} #{msg}"
+  end
+
+  def log_info(msg)
+    logger.info "#{get_log_tag} #{msg}"
+  end
 end
