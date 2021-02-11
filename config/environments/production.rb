@@ -139,13 +139,13 @@ Rails.application.configure do
   end
 
   config.log_formatter = proc do |severity, time, _progname, msg|
-    "#{severity}: #{msg} \n"
+    "[#{severity}] #{msg} \n"
   end
 
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [:uuid, :remote_ip, lambda { |req| Time.now }]
+  config.log_tags = [:uuid, lambda { |req| Time.now }]
 
   if ENV["RAILS_LOG_TO_STDOUT"] == "true"
     logger = ActiveSupport::Logger.new(STDOUT)
