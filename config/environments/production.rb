@@ -145,7 +145,7 @@ Rails.application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [:uuid, lambda { |req| Time.now }]
+  config.log_tags = [:request_id, lambda { |req| Time.zone.now }]
 
   if ENV["RAILS_LOG_TO_STDOUT"] == "true"
     logger = ActiveSupport::Logger.new(STDOUT)

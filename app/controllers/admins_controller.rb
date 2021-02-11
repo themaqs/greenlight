@@ -171,7 +171,7 @@ class AdminsController < ApplicationController
     begin
       # Get uid of user that will be merged into the other account
       uid_to_merge = params[:merge]
-      logger.info "#{current_user.uid} is attempting to merge #{uid_to_merge} into #{@user.uid}"
+      log_info "#{current_user.uid} is attempting to merge #{uid_to_merge} into #{@user.uid}"
 
       # Check to make sure the 2 users are unique
       raise "Can not merge the user into themself" if uid_to_merge == @user.uid
@@ -194,10 +194,10 @@ class AdminsController < ApplicationController
       # Delete merged user
       user_to_merge.destroy(true)
     rescue => e
-      logger.info "Failed to merge #{uid_to_merge} into #{@user.uid}: #{e}"
+      log_info "Failed to merge #{uid_to_merge} into #{@user.uid}: #{e}"
       flash[:alert] = I18n.t("administrator.flash.merge_fail")
     else
-      logger.info "#{current_user.uid} successfully merged #{uid_to_merge} into #{@user.uid}"
+      log_info "#{current_user.uid} successfully merged #{uid_to_merge} into #{@user.uid}"
       flash[:success] = I18n.t("administrator.flash.merge_success")
     end
 

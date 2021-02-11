@@ -171,5 +171,8 @@ module Greenlight
 
     # Default admin password
     config.admin_password_default = ENV['ADMIN_PASSWORD'] || 'administrator'
+
+    config.time_zone = 'Tehran'
+
   end
 end

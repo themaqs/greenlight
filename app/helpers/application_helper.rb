@@ -154,4 +154,5 @@ module ApplicationHelper
   def log_info(msg)
     logger.info "#{get_log_tag}: #{msg}"
   end
+
 end

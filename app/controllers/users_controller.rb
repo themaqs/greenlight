@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     # User has passed all validations required
     @user.save
 
-    logger.info "Support: #{@user.email} user has been created."
+    log_info "Signup: #{@user.email} user has been created."
 
     # Set user to pending and redirect if Approval Registration is set
     if approval_registration
@@ -142,7 +142,7 @@ class UsersController < ApplicationController
     admin_path = request.referer.present? ? request.referer : admins_path
     @user = User.include_deleted.find_by(uid: params[:user_uid])
 
-    logger.info "Support: #{current_user.email} is deleting #{@user.email}."
+    log_info "User: #{current_user.email} is deleting #{@user.email}."
 
     self_delete = current_user == @user
     redirect_url = self_delete ? root_path : admin_path
@@ -171,7 +171,7 @@ class UsersController < ApplicationController
         flash[:alert] = I18n.t("administrator.flash.delete_fail")
       end
     rescue => e
-      logger.error "Support: Error in user deletion: #{e}"
+      log_error "User: Error in user deletion: #{e}"
       flash[:alert] = I18n.t(params[:message], default: I18n.t("administrator.flash.delete_fail"))
     end
 

@@ -80,7 +80,7 @@
               <% begin %>
                 <%= render "admins/components/server_recording_row", recording: recording %>
               <% rescue => e %>
-                <% logger.error "Error retrieving recording #{recording[:meetingID]}: #{e} -> #{e.backtrace[0]}" %>
+                <% log_error "Error retrieving recording #{recording[:meetingID]}: #{e} -> #{e.backtrace[0]}" %>
                 <% failed_recordings += 1 %>
               <% end %>
             <% end %>

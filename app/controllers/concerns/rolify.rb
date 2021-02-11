@@ -104,7 +104,7 @@ module Rolify
         Role.find(id).update_attribute(:priority, old_priority[id.to_i].priority)
       end
 
-      logger.error "#{current_user} failed to update role priorities: #{e}"
+      log_error "#{current_user} failed to update role priorities: #{e}"
 
       false
     end

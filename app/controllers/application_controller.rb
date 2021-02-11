@@ -108,7 +108,7 @@ class ApplicationController < ActionController::Base
       I18n.locale = locale.tr('-', '_') unless locale.nil?
     rescue
       # Default to English if there are any issues in language
-      logger.error("Support: User locale is not supported (#{locale}")
+      log_error("User locale is not supported (#{locale}")
       I18n.locale = "en"
     end
   end
@@ -156,7 +156,7 @@ class ApplicationController < ActionController::Base
       provider_info = retrieve_provider_info(@user_domain, 'api2', 'getUserGreenlightCredentials')
       provider_info['provider'] == 'greenlight'
     rescue => e
-      logger.error "Error in checking if greenlight accounts are allowed: #{e}"
+      log_error "Error in checking if greenlight accounts are allowed: #{e}"
       false
     end
   end
@@ -227,7 +227,7 @@ class ApplicationController < ActionController::Base
 
   # Manually handle BigBlueButton errors
   rescue_from BigBlueButton::BigBlueButtonException do |ex|
-    logger.error "BigBlueButtonException: #{ex}"
+    log_error "BigBlueButtonException: #{ex}"
     render "errors/bigbluebutton_error"
   end
 
@@ -266,7 +266,7 @@ class ApplicationController < ActionController::Base
       # Add a session variable if the provider exists
       session[:provider_exists] = @user_domain
     rescue => e
-      logger.error "Error in retrieve provider info: #{e}"
+      log_error "Error in retrieve provider info: #{e}"
       @hide_signin = true
       if e.message.eql? "No user with that id exists"
         set_default_settings

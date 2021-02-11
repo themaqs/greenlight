@@ -39,7 +39,7 @@ module BbbApi
       route
     )
 
-    logger.info uri
+    log_info uri
 
     # Make the request.
     http = Net::HTTP.new(uri.host, uri.port)

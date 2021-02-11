@@ -51,7 +51,7 @@ class RoomsController < ApplicationController
     # Save the room and redirect if it fails
     return redirect_to current_user.main_room, flash: { alert: I18n.t("room.create_room_error") } unless @room.save
 
-    logger.info "Support: #{current_user.email} has created a new room #{@room.uid}."
+    log_info "Class: #{current_user.email} has created a new class #{@room.uid}."
 
     # Redirect to room is auto join was not turned on
     return redirect_to @room,
@@ -128,7 +128,7 @@ class RoomsController < ApplicationController
 
     save_recent_rooms
 
-    logger.info "Support: #{current_user.present? ? current_user.email : @join_name} is joining room #{@room.uid}"
+    log_info "Class: #{current_user.present? ? current_user.email : @join_name} is joining room #{@room.uid}"
     join_room(default_meeting_options)
   end
 
@@ -166,7 +166,7 @@ class RoomsController < ApplicationController
 
   # POST /:room_uid/start
   def start
-    logger.info "Support: #{current_user.email} is starting room #{@room.uid}"
+    log_info "Class: #{current_user.email} is starting class #{@room.uid}"
 
     # Join the user in and start the meeting.
     opts = default_meeting_options
@@ -181,7 +181,7 @@ class RoomsController < ApplicationController
     begin
       redirect_to join_path(@room, current_user.name, opts, current_user.uid)
     rescue BigBlueButton::BigBlueButtonException => e
-      logger.error("Support: #{@room.uid} start failed: #{e}")
+      log_error("Support: #{@room.uid} start failed: #{e}")
 
       redirect_to room_path, alert: I18n.t(e.key.to_s.underscore, default: I18n.t("bigbluebutton_exception"))
     end
@@ -208,7 +208,7 @@ class RoomsController < ApplicationController
 
       flash[:success] = I18n.t("room.update_settings_success")
     rescue => e
-      logger.error "Support: Error in updating room settings: #{e}"
+      log_error "Class: Error in updating class settings: #{e}"
       flash[:alert] = I18n.t("room.update_settings_error")
     end
 
@@ -233,7 +233,7 @@ class RoomsController < ApplicationController
 
       flash[:success] = I18n.t("room.preupload_success")
     rescue => e
-      logger.error "Support: Error in updating room presentation: #{e}"
+      log_error "Class: Error in updating class presentation: #{e}"
       flash[:alert] = I18n.t("room.preupload_error")
     end
 
@@ -247,7 +247,7 @@ class RoomsController < ApplicationController
 
       flash[:success] = I18n.t("room.preupload_remove_success")
     rescue => e
-      logger.error "Support: Error in removing room presentation: #{e}"
+      log_error "Class: Error in removing class presentation: #{e}"
       flash[:alert] = I18n.t("room.preupload_remove_error")
     end
 
@@ -275,7 +275,7 @@ class RoomsController < ApplicationController
 
       flash[:success] = I18n.t("room.shared_access_success")
     rescue => e
-      logger.error "Support: Error in updating room shared access: #{e}"
+      log_error "Class: Error in updating class shared access: #{e}"
       flash[:alert] = I18n.t("room.shared_access_error")
     end
 
@@ -288,7 +288,7 @@ class RoomsController < ApplicationController
       SharedAccess.find_by!(room_id: @room.id, user_id: current_user).destroy
       flash[:success] = I18n.t("room.remove_shared_access_success")
     rescue => e
-      logger.error "Support: Error in removing room shared access: #{e}"
+      log_error "Class: Error in removing class shared access: #{e}"
       flash[:alert] = I18n.t("room.remove_shared_access_error")
     end
 
@@ -313,7 +313,7 @@ class RoomsController < ApplicationController
 
   # GET /:room_uid/logout
   def logout
-    logger.info "Support: #{current_user.present? ? current_user.email : 'Guest'} has left room #{@room.uid}"
+    log_info "Class: #{current_user.present? ? current_user.email : 'Guest'} has left class #{@room.uid}"
 
     # Redirect the correct page.
     redirect_to @room

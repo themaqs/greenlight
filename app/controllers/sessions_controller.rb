@@ -63,7 +63,7 @@ class SessionsController < ApplicationController
 
   # POST /users/login
   def create
-    logger.info "Support: #{session_params[:email]} is attempting to login."
+    log_info "Login: #{session_params[:email]} is attempting to login."
 
     user = User.include_deleted.find_by(email: session_params[:email].downcase)
 
@@ -107,7 +107,7 @@ class SessionsController < ApplicationController
     begin
       process_signin
     rescue => e
-      logger.error "Error authenticating via omniauth: #{e}"
+      log_error "Error authenticating via omniauth: #{e}"
       omniauth_fail
     end
   end
@@ -151,7 +151,7 @@ class SessionsController < ApplicationController
     begin
       process_signin
     rescue => e
-      logger.error "Support: Error authenticating via omniauth: #{e}"
+      log_error "Login: Error authenticating via omniauth: #{e}"
       omniauth_fail
     end
   end
@@ -214,7 +214,7 @@ class SessionsController < ApplicationController
 
     user = User.from_omniauth(@auth)
 
-    logger.info "Support: Auth user #{user.email} is attempting to login."
+    log_info "Login: Auth user #{user.email} is attempting to login."
 
     # Add pending role if approval method and is a new user
     if approval_registration && !@user_exists
@@ -243,7 +243,7 @@ class SessionsController < ApplicationController
 
   # Send the user a password reset email to allow them to set their password
   def switch_account_to_local(user)
-    logger.info "Switching social account to local account for #{user.uid}"
+    log_info "Switching social account to local account for #{user.uid}"
 
     # Send the user a reset password email
     send_password_reset_email(user, user.create_reset_digest)
@@ -258,9 +258,23 @@ class SessionsController < ApplicationController
   def switch_account_to_social
     user = User.find_by(email: @auth['info']['email'], provider: @user_domain, social_uid: nil)
 
-    logger.info "Switching account to social account for #{user.uid}"
+    log_info "Switching account to social account for #{user.uid}"
 
     # Set the user's social id to the one being returned from auth
     user.update_attribute(:social_uid, @auth['uid'])
   end
+
+  def get_log_tag()
+    return "[#{request.env["HTTP_X_FORWARDED_FOR"]}] [#{current_user.email}]" unless current_user.nil?
+    "[#{request.env["HTTP_X_FORWARDED_FOR"]}]"
+  end
+
+  def log_error(msg)
+    logger.error "#{get_log_tag}: #{msg}"
+  end
+
+  def log_info(msg)
+    logger.info "#{get_log_tag}: #{msg}"
+  end
+
 end
