@@ -69,7 +69,7 @@ module RecordingsHelper
     "#{ENV['MEDIA_SERVER_LINK']}/presentation/#{id}/#{class_name}_#{t}.zip"
   end
 
-  def get_log_tag()
+  def get_log_tag
     return "[#{request.env["HTTP_X_FORWARDED_FOR"]}] [#{@current_user.email}]" unless @current_user.nil?
     "[#{request.env["HTTP_X_FORWARDED_FOR"]}]"
   end
