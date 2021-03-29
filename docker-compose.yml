@@ -9,22 +9,17 @@ services:
     restart: unless-stopped
     ports:
       - 127.0.0.1:5000:80
-# When using external logging
-#    logging:
-#      driver: $LOG_DRIVER
-#      options:
-#        syslog-address: $LOG_ADDRESS
-#        tag: $LOG_TAG
     volumes:
       - ./log:/usr/src/app/log
       - ./storage:/usr/src/app/storage
-# When using sqlite3 as the database
-#      - ./db/production:/usr/src/app/db/production
-# When using postgresql as the database
     links:
       - db
+    networks:
+      iasbs:
+        ipv4_address: 10.4.0.2
+
   db:
-    image: postgres:9.5
+    image: postgres:13.2-alpine
     container_name: iasbs-db
     restart: unless-stopped
     ports:
@@ -35,9 +30,32 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
+    networks:
+      iasbs:
+        ipv4_address: 10.4.0.3
+
+  db-admin:
+    image: dpage/pgadmin4
+    container_name: db-admin
+    restart: unless-stopped
+    environment:
+      - PGADMIN_DEFAULT_PASSWORD=pass
+      - PGADMIN_DEFAULT_EMAIL=email
+    ports:
+      - "8080:80"
+    networks:
+      iasbs:
+        ipv4_address: 10.4.0.4
+    volumes:
+      - ./db-admin/data:/var/lib/pgadmin
+      - ./db-admin/servers.json:/pgadmin4/servers.json
+      - ./db-admin/pgpass:/pgpass
 
 networks:
-  default:
-    external:
-      name: iasbs
+  iasbs:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.4.0.0/16
+
 
