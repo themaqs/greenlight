@@ -14,9 +14,51 @@
 %>
 <html>
 <head>
-<title>
-Users List
-</title>
+  <head>
+    <% if Rails.configuration.google_analytics %>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="<%= google_analytics_url %>"></script>
+      <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', "<%= ENV["GOOGLE_ANALYTICS_TRACKING_ID"] %>");
+      </script>
+    <% end %>
+
+    <title><%= yield(:page_title).present? ? yield(:page_title) : t("bigbluebutton") %></title>
+    <meta property="og:title" content="<%= yield(:page_title).present? ? yield(:page_title) : t("bigbluebutton") %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="<%= yield(:page_desc).present? ? yield(:page_desc) : t("landing.about", href: "Greenlight", locale: :en) %>" />
+    <meta property="og:url" content="<%= request.base_url %>" />
+    <meta property="og:image" content="<%= request.base_url %>/logo-fav.png" />
+    <meta name="viewport" content= "width=device-width, user-scalable=no">
+    <%= csrf_meta_tags %>
+
+    <!-- Global javascript variables and helpers. -->
+    <script type="text/javascript">
+        window.GreenLight = {};
+        window.GreenLight.WEBSOCKET_HOST = "<%= ENV['WEBSOCKET_HOST'] %>"
+        window.GreenLight.RELATIVE_ROOT = "<%= relative_root %>"
+    </script>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= favicon_link_tag asset_path('favicon.ico') %>
+
+    <!-- Primary color styling -->
+    <%= stylesheet_link_tag themes_primary_path %>
+
+    <script type="text/javascript">
+        // Include the correct translated strings for Javascript
+        window.I18n = <%= current_translations.to_json.html_safe %>
+            window.I18nFallback = <%= fallback_translations.to_json.html_safe %>
+    </script>
+    <link href='https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css' rel='stylesheet' type='text/css'>
+
+  </head>
 </head>
 <body>
 <style>
