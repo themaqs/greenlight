@@ -23,7 +23,7 @@ class PlayingController < ApplicationController
     log_info("Recording: #{current_user.email} play: #{params["tkn"]}")
     @meet_id = params["tkn"]
     return redirect_to root_path unless @meet_id
-    return redirect_to
+    redirect_to "#{ENV['MEDIA_SERVER_LINK']}/playback/#{@meet_id}"
     # render "playing/playback", :layout => false
   end
 
