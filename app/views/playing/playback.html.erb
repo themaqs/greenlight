@@ -47,16 +47,6 @@
 
   <%= favicon_link_tag asset_path('favicon.ico') %>
 
-  <!-- Primary color styling -->
-  <%= stylesheet_link_tag themes_primary_path %>
-
-  <script type="text/javascript">
-      // Include the correct translated strings for Javascript
-      window.I18n = <%= current_translations.to_json.html_safe %>
-          window.I18nFallback = <%= fallback_translations.to_json.html_safe %>
-  </script>
-  <link href='https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css' rel='stylesheet' type='text/css'>
-
 </head>
 <body>
 <style>
