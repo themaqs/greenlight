@@ -64,7 +64,15 @@ module RecordingsHelper
   def get_save_url(id,name, time)
     class_name = name.gsub(' ', '_')
     t = DateTime.parse(time.to_s)
-    t = t.new_offset(ENV['TIME_OFFSET'])
+    o = ""
+    m = t.strftime("%m").to_i
+    d = t.strftime("%d").to_i
+    if m < 3 or m > 9
+      o = "+0330"
+    elsif (m == 3 and d.to_i > 21) or (m.to_i < 9) or (m.to_i == 9 and d.to_i < 22)
+      o = "+0430"
+    end
+    t = t.new_offset(o)
     t = t.strftime("%Y-%m-%d_%H-%M")
     "#{ENV['MEDIA_SERVER_LINK']}/presentation/#{id}/#{class_name}_#{t}.zip"
   end
