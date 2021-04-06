@@ -30,6 +30,12 @@ module Joiner
       ""
     end
 
+    @name = if current_user.email.start_with?(ENV['GUEST_PRFX'])
+      ""
+    else
+      @name
+    end
+
     @search, @order_column, @order_direction, pub_recs =
       public_recordings(@room.bbb_id, params.permit(:search, :column, :direction), true)
 
@@ -59,7 +65,7 @@ module Joiner
       opts[:require_moderator_approval] = room_setting_with_config("requireModeratorApproval")
       opts[:mute_on_start] = room_setting_with_config("muteOnStart")
 
-      if current_user
+      if current_user && !current_user.email.start_with?(ENV['GUEST_PRFX'])
         redirect_to join_path(@room, current_user.name, opts, current_user.uid)
       else
         join_name = params[:join_name] || params[@room.invite_path][:join_name]
