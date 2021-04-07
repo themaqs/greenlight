@@ -28,7 +28,7 @@ class UserMailer < ApplicationMailer
     @url = url
     @image = logo_image
     @color = user_color
-    mail(to: @user.email, subject: t('landing.welcome'))
+    mail(from: 'IASBS E-Learning System', to: @user.email, subject: t('landing.welcome'))
   end
 
   def password_reset(user, url, settings)
@@ -37,7 +37,7 @@ class UserMailer < ApplicationMailer
     @url = url
     @image = logo_image
     @color = user_color
-    mail to: user.email, subject: t('reset_password.subtitle')
+    mail from: 'IASBS E-Learning System', to: user.email, subject: t('reset_password.subtitle')
   end
 
   def user_promoted(user, role, url, settings)
@@ -51,7 +51,7 @@ class UserMailer < ApplicationMailer
                   role.get_permission("can_manage_rooms_recordings") ||
                   role.get_permission("can_edit_site_settings") ||
                   role.get_permission("can_edit_roles")
-    mail to: user.email, subject: t('mailer.user.promoted.subtitle', role: translated_role_name(role))
+    mail from: 'IASBS E-Learning System', to: user.email, subject: t('mailer.user.promoted.subtitle', role: translated_role_name(role))
   end
 
   def user_demoted(user, role, url, settings)
@@ -61,7 +61,7 @@ class UserMailer < ApplicationMailer
     @image = logo_image
     @color = user_color
     @role = translated_role_name(role)
-    mail to: user.email, subject: t('mailer.user.demoted.subtitle', role: translated_role_name(role))
+    mail from: 'IASBS E-Learning System', to: user.email, subject: t('mailer.user.demoted.subtitle', role: translated_role_name(role))
   end
 
   def invite_email(name, email, invite_date, url, settings)
@@ -72,7 +72,7 @@ class UserMailer < ApplicationMailer
     @image = logo_image
     @color = user_color
     @date = "#{(invite_date + 2.days).strftime('%b %d, %Y %-I:%M%P')} UTC"
-    mail to: email, subject: t('mailer.user.invite.subject')
+    mail from: 'IASBS E-Learning System', to: email, subject: t('mailer.user.invite.subject')
   end
 
   def approve_user(user, url, settings)
@@ -81,7 +81,7 @@ class UserMailer < ApplicationMailer
     @url = url
     @image = logo_image
     @color = user_color
-    mail to: user.email, subject: t('mailer.user.approve.subject')
+    mail from: 'IASBS E-Learning System', to: user.email, subject: t('mailer.user.approve.subject')
   end
 
   def approval_user_signup(user, url, admin_emails, settings)
@@ -91,7 +91,7 @@ class UserMailer < ApplicationMailer
     @image = logo_image
     @color = user_color
 
-    mail to: admin_emails, subject: t('mailer.user.approve.signup.subject')
+    mail from: 'IASBS E-Learning System', to: admin_emails, subject: t('mailer.user.approve.signup.subject')
   end
 
   def invite_user_signup(user, url, admin_emails, settings)
@@ -101,6 +101,6 @@ class UserMailer < ApplicationMailer
     @image = logo_image
     @color = user_color
 
-    mail to: admin_emails, subject: t('mailer.user.invite.signup.subject')
+    mail from: 'IASBS E-Learning System', to: admin_emails, subject: t('mailer.user.invite.signup.subject')
   end
 end
