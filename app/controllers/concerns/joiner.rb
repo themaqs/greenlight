@@ -30,7 +30,7 @@ module Joiner
       ""
     end
 
-    @name = if current_user.email.start_with?(ENV['GUEST_PRFX'])
+    @name = if !current_user.nil? && current_user.email.start_with?(ENV['GUEST_PRFX'])
       ""
     else
       @name
