@@ -20,7 +20,7 @@ class UserMailer < ApplicationMailer
   include ApplicationHelper
   include ThemingHelper
 
-  default from: Rails.configuration.smtp_sender
+  default from: 'IASBS E-Learning System <' + Rails.configuration.smtp_sender + '>'
 
   def verify_email(user, url, settings)
     @settings = settings
